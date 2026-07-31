@@ -107,12 +107,17 @@ async function extractSearchResults(params = {}) {
 
     const result = [];
     $(elements).each((_, el) => {
-      const id =
-        $(el)
-          .find(".film-detail .film-name .dynamic-name")
-          ?.attr("href")
-          ?.slice(1)
-          .split("?ref=search")[0] || null;
+     const rawHref =
+  $(el)
+    .find(".film-detail .film-name .dynamic-name")
+    ?.attr("href") || "";
+const id =
+  rawHref
+    .replace(/^https?:\/\/[^\/]+/, "")
+    .replace(/^\/anime\//, "")
+    .replace(/\/$/, "")
+    .split("?ref=search")[0] || null;
+
       result.push({
         id: id,
         data_id: $(el)
