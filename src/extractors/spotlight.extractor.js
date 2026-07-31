@@ -36,22 +36,13 @@ async function extractSpotlights() {
           )
           .text()
           .trim();
-        const id = $(ele)
-          .find(
-            ".deslide-item > .deslide-item-content > .desi-buttons > a:eq(0)"
-          )
-          .attr("href")
-          .split("/")
-          .pop();
-        const data_id = $(ele)
-          .find(
-            ".deslide-item > .deslide-item-content > .desi-buttons > a:eq(0)"
-          )
-          .attr("href")
-          .split("/")
-          .pop()
-          .split("-")
-          .pop();
+        const href = $(ele)
+  .find(".deslide-item > .deslide-item-content > .desi-buttons > a:eq(0)")
+  .attr("href");
+const id = href.replace(/\/$/, "").split("/").pop();
+const data_id = $(ele).find(".deslide-cover .film-poster-img").attr("data-id") || 
+  href.replace(/\/$/, "").split("/").pop();
+
         const tvInfoMapping = {
           0: "showType",
           1: "duration",
